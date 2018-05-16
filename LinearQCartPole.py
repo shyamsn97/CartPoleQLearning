@@ -30,6 +30,7 @@ class LinearQCartPole():
 		self.solved = False
 
 	def get_q_vals(self,state_vec):
+
 		state_vec1 = self.transform(state_vec,0)
 		state_vec2 = self.transform(state_vec,1)
 		q = []
@@ -49,6 +50,7 @@ class LinearQCartPole():
 		return np.argmax(qvals), np.max(qvals)
 
 	def update(self,difference,state_vec,action):
+
 		state_vec = self.transform(state_vec,action)
 		self.weights -= self.learning_rate*difference*state_vec
 
@@ -61,12 +63,12 @@ class LinearQCartPole():
 			zeros[4:] = vec
 		return zeros
 
-	def main(self,random=False,file="none",plot=True,render=True):
+	def main(self,random=False,file="none",test=False,plot=True,render=True):
 
 		self.initialize()
 
 		if file != "none":
-			self.weights = np.loadtxt(file)
+			self.weights = np.loadtxt("weights/" + file)
 			self.epsilon = 0
 		scores = deque(maxlen=100)
 		meanscores = deque(maxlen=self.trials)
@@ -82,7 +84,6 @@ class LinearQCartPole():
 
 				if render ==  True:
 					self.env.render()
-
 				if random == True:
 					action = self.env.action_space.sample()
 					next_state, reward, done, _ = self.env.step(action)
@@ -100,7 +101,7 @@ class LinearQCartPole():
 					else:
 						diff = reward + self.gamma*newq - qval
 						if steps == 498:
-							if trial >= 100:
+							if trial >= 150:
 								# self.converge = True
 								self.learning_rate = 0.01
 						if self.converge != True:
@@ -132,7 +133,8 @@ class LinearQCartPole():
 				if converge_point == 0:
 					converge_point = trial
 				print("SOLVED at trial: " + str(converge_point))
-				return converge_point
+				if test == True:
+					return converge_point
 
 			cumulative_rew += cumulative
 			rew_array.append(cumulative)
@@ -143,7 +145,8 @@ class LinearQCartPole():
 		print("AVG REWARD: " + str(cumulative_rew/self.trials))
 
 		if random == False and file == "none":
-			np.savetxt('weights.txt',self.weights)
+			print("Save File")
+			np.savetxt('weights/weights.txt',self.weights)
 
 		if plot == True:
 			x = np.arange(self.trials)
@@ -165,7 +168,7 @@ class LinearQCartPole():
 	def test(self,ran):
 		solved_times = []
 		for i in range(int(ran)):
-			converge = self.main(plot=False,render=False)
+			converge = self.main(test=True,plot=False,render=False)
 			solved_times.append(converge)
 			print("FINISHED TRIAL: " + str(i))
 		print("AVERAGE SOLVE TIME: " + str(np.mean(solved_times)))
@@ -188,7 +191,7 @@ if __name__ == '__main__':
 			mc = LinearQCartPole(trials=int(sys.argv[1]))
 			mc.test(sys.argv[3])
 
-	else:
+	elif len(sys.argv) == 2:
 		if len(sys.argv) == 2 and sys.argv[1] == "-h":
 			s = "This agent solves the CartPole environment(average reward of >= 195 over 100 consecutive trials) using linear Q learning(Online Least Squares)\n   Arguments:\n   Train a new agent: [episodes]\n   Random Agent: [episodes] -random\n   Load in weights: [episodes] -f [filename.txt]\n   Test to see average solve times: [episodes] -test [number of tests]"
 			print(s)
@@ -197,3 +200,6 @@ if __name__ == '__main__':
 			mc.main()
 		else:
 			print("Please enter a number of episodes!")
+
+	else:
+		print("Please enter a number of episodes or a command line argument!")
