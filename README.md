@@ -1,6 +1,6 @@
 # CartPoleQLearning
 
-## Q learning agent that learns to master Cart Pole system
+## Q learning agent that learns to master Cart Pole 
 
 ![alt text](game.png)
 
@@ -16,7 +16,7 @@
 
 ![alt text](Learning.gif)
 
-## Clip of perfect solution found by agent (Achieves maximum 500 reward every trial)
+## Clip of perfect solution found by agent (Achieves max 500 reward every trial)
 
 ![alt text](PerfectSolution.gif)
 
