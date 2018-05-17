@@ -2,7 +2,7 @@
 
 ## Q learning agent that learns to master Cart Pole 
 
-![alt text](game.png)
+![alt text](pictures/game.png)
 
 ### game stops after 500 steps
 
@@ -10,15 +10,15 @@
 
 ## Linear function and optimization process
 
-![alt text](formula.png)
+![alt text](pictures/formula.png)
 
 ## Clip of agent learning to play
 
-![alt text](Learning.gif)
+![alt text](pictures/Learning.gif)
 
 ## Clip of perfect solution found by agent (Achieves max 500 reward every trial)
 
-![alt text](PerfectSolution.gif)
+![alt text](pictures/PerfectSolution.gif)
 
 ## How to use 
   #### (requires python3, gym, numpy, matplotlib) 
