@@ -21,11 +21,16 @@
 ![alt text](PerfectSolution.gif)
 
 ## How to use 
-  (requires python3) <br>
+  (requires python3, gym, numpy, matplotlib) <br>
+
   Show help: python LinearQCartPole.py -h <br>
+
   Train a new agent: python LinearQCartPole.py [episodes]  <br>
+
   Random Agent: python LinearQCartPole.py [episodes] -random  <br>
+
   Load in weights: python LinearQCartPole.py [episodes] -f [filename.txt]   <br>
+
   Test to see average solve times: python LinearQCartPole.py [episodes] -test [number of tests] 
 
 	
