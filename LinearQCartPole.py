@@ -68,7 +68,7 @@ class LinearQCartPole():
 		self.initialize()
 
 		if file != "none":
-			self.weights = np.loadtxt("weights/" + file)
+			self.weights = np.loadtxt(file)
 			self.epsilon = 0
 		scores = deque(maxlen=100)
 		meanscores = deque(maxlen=self.trials)
