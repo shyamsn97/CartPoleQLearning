@@ -4,8 +4,6 @@
 
 ![alt text](pictures/game.png)
 
-### game stops after 500 steps
-
 ### This agent consistently solves the system (gets an average of 195 or greater reward over 100 consecutive trials) at around trial 120-150
 
 ## Linear function and optimization process
